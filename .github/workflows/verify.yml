@@ -26,4 +26,5 @@ jobs:
         run: |
           gcc -std=c11 -Wall -Wextra -Werror -fPIC -shared -Ipatcher/include patcher/source/roots.c patcher/source/sha256.c -lmbedx509 -lmbedcrypto -o /tmp/skater-roots-tests.so
           python patcher/tests/test_roots.py /tmp/skater-roots-tests.so
+      - run: python -m unittest discover -s scripts/tests -v
       - run: python -m compileall -q scripts
