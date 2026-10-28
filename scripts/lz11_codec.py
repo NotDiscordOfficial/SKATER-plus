@@ -6,6 +6,8 @@ from collections import defaultdict, deque
 def compress(data: bytes) -> bytes:
     if len(data) > 0xFFFFFF:
         raise ValueError("input too large for short LZ11 header")
+    if not data:
+        return b"\x11\x00\x00\x00\x00\x00\x00\x00"
     out = bytearray((0x11, len(data) & 0xFF, (len(data) >> 8) & 0xFF,
                      (len(data) >> 16) & 0xFF))
     chains: dict[bytes, deque[int]] = defaultdict(deque)
